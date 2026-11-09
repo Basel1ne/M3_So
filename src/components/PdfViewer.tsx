@@ -12,8 +12,11 @@ export const PdfViewer: React.FC<PdfViewerProps> = ({ initialPdf }) => {
   );
 
   const currentUnit = UNITS.find(u => u.id === selectedUnit) || UNITS[0];
-  const pdfUrl = `/assets/aistudio/${currentUnit.pdfFile}`;
-
+  // 깃허브 페이지(/M3_So/) 및 로컬 환경 자동 분기
+  const basePath = window.location.pathname.startsWith('/M3_So') ? '/M3_So/' : '/';
+  const pdfUrl = `${basePath}assets/aistudio/${currentUnit.pdfFile}`;
+  const zipUrl = `${basePath}assets/aistudio/m3_social_14_pdfs.zip`;
+  
   return (
     <div className="max-w-6xl mx-auto space-y-6 pb-16">
       {/* Header */}
