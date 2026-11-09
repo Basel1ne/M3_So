@@ -12,11 +12,11 @@ export const PdfViewer: React.FC<PdfViewerProps> = ({ initialPdf }) => {
   );
 
   const currentUnit = UNITS.find(u => u.id === selectedUnit) || UNITS[0];
-  // 깃허브 페이지(/M3_So/) 및 로컬 환경 자동 분기
+  // GitHub Pages 저장소 경로(/M3_So/) 자동 감지
   const basePath = window.location.pathname.startsWith('/M3_So') ? '/M3_So/' : '/';
   const pdfUrl = `${basePath}assets/aistudio/${currentUnit.pdfFile}`;
   const zipUrl = `${basePath}assets/aistudio/m3_social_14_pdfs.zip`;
-  
+
   return (
     <div className="max-w-6xl mx-auto space-y-6 pb-16">
       {/* Header */}
@@ -31,8 +31,25 @@ export const PdfViewer: React.FC<PdfViewerProps> = ({ initialPdf }) => {
           </p>
         </div>
 
-        {/* Action Button */}
-        <div className="flex items-center gap-2">
+        {/* Action Buttons */}
+        <div className="flex flex-wrap items-center gap-2">
+          <a
+            href={zipUrl}
+            download="중3사회_14개단원_기출전체_PDF.zip"
+            className="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-black text-xs sm:text-sm flex items-center gap-1.5 shadow-md shadow-emerald-600/20 transition active:scale-95"
+            title="첨부된 14종의 모든 PDF를 한 번에 압축파일로 다운로드"
+          >
+            <Download className="w-4 h-4" />
+            <span>14개 전 단원 PDF 일괄 다운로드 (ZIP)</span>
+          </a>
+          <a
+            href={pdfUrl}
+            download={`${currentUnit.title}.pdf`}
+            className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs sm:text-sm flex items-center gap-1.5 shadow-sm transition"
+          >
+            <Download className="w-4 h-4" />
+            <span>선택 단원 PDF 다운</span>
+          </a>
           <a
             href={pdfUrl}
             target="_blank"
@@ -40,7 +57,7 @@ export const PdfViewer: React.FC<PdfViewerProps> = ({ initialPdf }) => {
             className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm flex items-center gap-1.5 transition"
           >
             <ExternalLink className="w-4 h-4 text-slate-500" />
-            <span>새 탭에서 전체화면 보기</span>
+            <span>새 탭에서 열기</span>
           </a>
         </div>
       </div>
